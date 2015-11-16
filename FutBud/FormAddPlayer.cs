@@ -88,9 +88,7 @@ namespace FutBud
             if (resp != null)
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
-                var html = new StreamReader(stream: resp.GetResponseStream(), encoding: Encoding.Default).ReadToEnd();
-
-                //Antwort auffangen
+                var html = new StreamReader(stream: resp.GetResponseStream(), encoding: Encoding.UTF8).ReadToEnd();
                 resp.Close();
                 SearchResultJson deserializedProduct = JsonConvert.DeserializeObject<SearchResultJson>(html);
                 lblResults.Text = @"Results: " + deserializedProduct.count;
