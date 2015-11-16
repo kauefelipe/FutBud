@@ -13,3 +13,9 @@ If you can't build the source for unknown reason, you can download binary files 
  
 ## Supported platforms
 - .NET 4.5
+
+## Screenshots
+
+![FutBud](http://futbud.com/download/Main.png )
+![FutBud](http://futbud.com/download/AddPlayer.png)
+![FutBud](http://futbud.com/download/Settings.png)
