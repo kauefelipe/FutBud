@@ -77,20 +77,25 @@ namespace FutBud
             btnSearch.Enabled = false;
             mgTable.Rows.Clear();
             string name = tbPlayerName.Text;
-            var req = (HttpWebRequest)WebRequest.Create("http://www.easports.com/uk/fifa/ultimate-team/api/fut/item?jsonParamObject=%7B%22name%22:%22" + name + "%22%7D");
-            req.Method = "GET";
-            req.Headers.Add("Accept-Language", "de-DE,de;q=0.8,en-US;q=0.6,en;q=0.4");
-            req.Headers.Add("Accept-Encoding", "gzip, deflate, sdch");
-            req.Accept = "application/json, text/plain, */*";
-            req.UserAgent = "Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 46.0.2490.80 Safari / 537.36";
-            
-            var resp = await req.GetResponseAsync();
-            if (resp != null)
+            var json_data = string.Empty;
+
+            using (var w = new WebClient())
             {
-                // ReSharper disable once AssignNullToNotNullAttribute
-                var html = new StreamReader(stream: resp.GetResponseStream(), encoding: Encoding.UTF8).ReadToEnd();
-                resp.Close();
-                SearchResultJson deserializedProduct = JsonConvert.DeserializeObject<SearchResultJson>(html);
+                                
+                try
+                {
+                    json_data = w.DownloadString("http://www.easports.com/uk/fifa/ultimate-team/api/fut/item?jsonParamObject=%7B%22name%22:%22" + name + "%22%7D");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Could not get data");
+                }
+                
+            }
+
+            if (json_data != null)
+            {                
+                SearchResultJson deserializedProduct = JsonConvert.DeserializeObject<SearchResultJson>(json_data);
                 lblResults.Text = @"Results: " + deserializedProduct.count;
                 int i = 0;
                 foreach (SearchResultJson.Item item in deserializedProduct.items)
