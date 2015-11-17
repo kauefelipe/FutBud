@@ -1,5 +1,5 @@
-You may use, distribute and copy Kodi under the terms of GNU General
- Public License version 2, which is displayed below.
+You may use, distribute and copy under the terms of GNU General
+Public License version 2, which is displayed below.
 
 Copyright (C) 2015  Lululuz
 https://github.com/Lululuz
