@@ -7,20 +7,31 @@ namespace FutBud.Services
 {
     internal static class CookieUtil
     {
-        public static void WriteCookiesToDisk(string file, CookieContainer cookieJar)
+        public static void WriteCookiesToDisk(string file, CookieContainer c)
         {
+            CookieContainer ccnew = new CookieContainer();
+
+            //get the auth cookie "_nx_mpcid" from the cookiecontainer
+            var authCookie = c.GetCookies(new Uri("http://ea.com"));
+            foreach (Cookie cookie in authCookie)
+            {
+                if (cookie.Name.Equals("_nx_mpcid"))
+                    ccnew.Add(cookie);
+            }
+
+            //save the cookiecontainer with the the auth cookie "_nx_mpcid"
             using (Stream stream = File.Create(file))
             {
                 try
                 {
-                    Console.Out.Write("Writing cookies to disk... ");
+                    WriteLog.DoWrite("Writing cookies to disk... ");
                     BinaryFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(stream, cookieJar);
-                    Console.Out.WriteLine("Done.");
+                    formatter.Serialize(stream, ccnew);
+                    WriteLog.DoWrite("Done.");
                 }
                 catch (Exception e)
                 {
-                    Console.Out.WriteLine("Problem writing cookies to disk: " + e.GetType());
+                    WriteLog.DoWrite("Problem writing cookies to disk: " + e.GetType());
                 }
             }
         }
@@ -32,15 +43,15 @@ namespace FutBud.Services
             {
                 using (Stream stream = File.Open(file, FileMode.Open))
                 {
-                    Console.Out.Write("Reading cookies from disk... ");
+                    WriteLog.DoWrite("Reading cookies from disk... ");
                     BinaryFormatter formatter = new BinaryFormatter();
-                    Console.Out.WriteLine("Done.");
+                    WriteLog.DoWrite("Done.");
                     return (CookieContainer) formatter.Deserialize(stream);
                 }
             }
             catch (Exception e)
             {
-                Console.Out.WriteLine("Problem reading cookies from disk: " + e.GetType());
+                WriteLog.DoWrite("Problem reading cookies from disk: " + e.GetType());
                 return new CookieContainer();
             }
 
