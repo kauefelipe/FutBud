@@ -38,7 +38,7 @@ namespace FutBud
 
         #endregion
 
-        public FormMain(FutClient client)
+        public FormMain(FutClient client, string[] account)
         {
             InitializeComponent();
             _client = client;
@@ -55,9 +55,11 @@ namespace FutBud
             tmrSearchRequest.Interval = _searchMs;
             cbCheckforUpdates.Checked = _checkforupdates;
 
+            lblAccount.Text = account[0];
             lblVersion.Text = @"Version " + ProductVersion;
             if(_client!=null)
                 GetCredits();
+            
         }
 
         private void Main_Load(object sender, EventArgs e)

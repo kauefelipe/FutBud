@@ -34,9 +34,9 @@ namespace FutBud
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.lblCredits = new MetroFramework.Controls.MetroLabel();
             this.tcMain = new MetroFramework.Controls.MetroTabControl();
@@ -60,6 +60,7 @@ namespace FutBud
             this.btnClear = new MetroFramework.Controls.MetroButton();
             this.tbLog = new System.Windows.Forms.RichTextBox();
             this.tpSettings = new MetroFramework.Controls.MetroTabPage();
+            this.cbCheckforUpdates = new MetroFramework.Controls.MetroCheckBox();
             this.btnSaveSettings = new MetroFramework.Controls.MetroButton();
             this.numericUpDownPricefix = new System.Windows.Forms.NumericUpDown();
             this.lblBuyRestriction = new MetroFramework.Controls.MetroLabel();
@@ -104,7 +105,7 @@ namespace FutBud
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tmrChecktradepile = new System.Windows.Forms.Timer(this.components);
-            this.cbCheckforUpdates = new MetroFramework.Controls.MetroCheckBox();
+            this.lblAccount = new MetroFramework.Controls.MetroLabel();
             this.tcMain.SuspendLayout();
             this.tpMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mgTable)).BeginInit();
@@ -119,7 +120,7 @@ namespace FutBud
             // lblCredits
             // 
             this.lblCredits.AutoSize = true;
-            this.lblCredits.Location = new System.Drawing.Point(286, 71);
+            this.lblCredits.Location = new System.Drawing.Point(249, 71);
             this.lblCredits.Name = "lblCredits";
             this.lblCredits.Size = new System.Drawing.Size(50, 19);
             this.lblCredits.TabIndex = 0;
@@ -137,7 +138,7 @@ namespace FutBud
             this.tcMain.Controls.Add(this.tpAbout);
             this.tcMain.Location = new System.Drawing.Point(24, 104);
             this.tcMain.Name = "tcMain";
-            this.tcMain.SelectedIndex = 2;
+            this.tcMain.SelectedIndex = 0;
             this.tcMain.Size = new System.Drawing.Size(662, 328);
             this.tcMain.TabIndex = 1;
             this.tcMain.UseSelectable = true;
@@ -172,14 +173,14 @@ namespace FutBud
             this.mgTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.mgTable.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.mgTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mgTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mgTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.mgTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mgTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Image,
@@ -193,14 +194,14 @@ namespace FutBud
             this.Column5,
             this.ImageUrl});
             this.mgTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.mgTable.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.mgTable.DefaultCellStyle = dataGridViewCellStyle2;
             this.mgTable.EnableHeadersVisualStyles = false;
             this.mgTable.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mgTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -208,14 +209,14 @@ namespace FutBud
             this.mgTable.MultiSelect = false;
             this.mgTable.Name = "mgTable";
             this.mgTable.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.mgTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mgTable.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.mgTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.mgTable.RowTemplate.Height = 40;
             this.mgTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -379,6 +380,17 @@ namespace FutBud
             this.tpSettings.VerticalScrollbarBarColor = true;
             this.tpSettings.VerticalScrollbarHighlightOnWheel = false;
             this.tpSettings.VerticalScrollbarSize = 10;
+            // 
+            // cbCheckforUpdates
+            // 
+            this.cbCheckforUpdates.AutoSize = true;
+            this.cbCheckforUpdates.Location = new System.Drawing.Point(3, 221);
+            this.cbCheckforUpdates.Name = "cbCheckforUpdates";
+            this.cbCheckforUpdates.Size = new System.Drawing.Size(176, 15);
+            this.cbCheckforUpdates.TabIndex = 14;
+            this.cbCheckforUpdates.Text = "Check for updates on startup";
+            this.cbCheckforUpdates.UseSelectable = true;
+            this.cbCheckforUpdates.CheckedChanged += new System.EventHandler(this.cbCheckforUpdates_CheckedChanged);
             // 
             // btnSaveSettings
             // 
@@ -850,7 +862,7 @@ namespace FutBud
             // 
             this.lblRuntime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRuntime.AutoSize = true;
-            this.lblRuntime.Location = new System.Drawing.Point(545, 71);
+            this.lblRuntime.Location = new System.Drawing.Point(550, 71);
             this.lblRuntime.Name = "lblRuntime";
             this.lblRuntime.Size = new System.Drawing.Size(129, 19);
             this.lblRuntime.TabIndex = 4;
@@ -886,16 +898,14 @@ namespace FutBud
             this.tmrChecktradepile.Interval = 60000;
             this.tmrChecktradepile.Tick += new System.EventHandler(this.tmrChecktradepile_Tick);
             // 
-            // cbCheckforUpdates
+            // lblAccount
             // 
-            this.cbCheckforUpdates.AutoSize = true;
-            this.cbCheckforUpdates.Location = new System.Drawing.Point(3, 221);
-            this.cbCheckforUpdates.Name = "cbCheckforUpdates";
-            this.cbCheckforUpdates.Size = new System.Drawing.Size(176, 15);
-            this.cbCheckforUpdates.TabIndex = 14;
-            this.cbCheckforUpdates.Text = "Check for updates on startup";
-            this.cbCheckforUpdates.UseSelectable = true;
-            this.cbCheckforUpdates.CheckedChanged += new System.EventHandler(this.cbCheckforUpdates_CheckedChanged);
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.Location = new System.Drawing.Point(249, 52);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(56, 19);
+            this.lblAccount.TabIndex = 5;
+            this.lblAccount.Text = "Account";
             // 
             // FormMain
             // 
@@ -903,6 +913,7 @@ namespace FutBud
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(702, 442);
+            this.Controls.Add(this.lblAccount);
             this.Controls.Add(this.lblRuntime);
             this.Controls.Add(this.psStatus);
             this.Controls.Add(this.lblStatus);
@@ -1005,5 +1016,6 @@ namespace FutBud
         private DataGridViewTextBoxColumn ImageUrl;
         private MetroButton btnCheckUpdates;
         private MetroCheckBox cbCheckforUpdates;
+        private MetroLabel lblAccount;
     }
 }

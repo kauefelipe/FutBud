@@ -3,7 +3,7 @@ using MetroFramework.Controls;
 
 namespace FutBud
 {
-    partial class FormEaLogin
+    partial class FormAddAccount
     {
         /// <summary>
         /// Required designer variable.
@@ -31,19 +31,15 @@ namespace FutBud
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEaLogin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddAccount));
             this.tbUsername = new MetroFramework.Controls.MetroTextBox();
             this.tbPassword = new MetroFramework.Controls.MetroTextBox();
             this.tbSecret = new MetroFramework.Controls.MetroTextBox();
             this.lblUsername = new MetroFramework.Controls.MetroLabel();
             this.lblPassword = new MetroFramework.Controls.MetroLabel();
             this.lblSecret = new MetroFramework.Controls.MetroLabel();
-            this.btnLogin = new MetroFramework.Controls.MetroButton();
             this.cbPlatform = new MetroFramework.Controls.MetroComboBox();
             this.lblPlatform = new MetroFramework.Controls.MetroLabel();
-            this.lblVersion = new MetroFramework.Controls.MetroLabel();
-            this.lblLink = new MetroFramework.Controls.MetroLink();
-            this.lbAccounts = new System.Windows.Forms.ListBox();
             this.btnAddAccount = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
@@ -75,7 +71,6 @@ namespace FutBud
             this.tbUsername.UseSelectable = true;
             this.tbUsername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.tbUsername.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            this.tbUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUsername_KeyDown);
             // 
             // tbPassword
             // 
@@ -162,16 +157,6 @@ namespace FutBud
             this.lblSecret.TabIndex = 5;
             this.lblSecret.Text = "SecretAnswer";
             // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(23, 239);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(155, 23);
-            this.btnLogin.TabIndex = 6;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseSelectable = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
             // cbPlatform
             // 
             this.cbPlatform.FormattingEnabled = true;
@@ -197,35 +182,6 @@ namespace FutBud
             this.lblPlatform.TabIndex = 9;
             this.lblPlatform.Text = "Platform";
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(373, 272);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(80, 19);
-            this.lblVersion.TabIndex = 13;
-            this.lblVersion.Text = "Version 1.0.0";
-            // 
-            // lblLink
-            // 
-            this.lblLink.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLink.Location = new System.Drawing.Point(13, 268);
-            this.lblLink.Name = "lblLink";
-            this.lblLink.Size = new System.Drawing.Size(119, 23);
-            this.lblLink.TabIndex = 12;
-            this.lblLink.Text = "FutBud.com";
-            this.lblLink.UseSelectable = true;
-            this.lblLink.Click += new System.EventHandler(this.lblLink_Click);
-            // 
-            // lbAccounts
-            // 
-            this.lbAccounts.FormattingEnabled = true;
-            this.lbAccounts.Location = new System.Drawing.Point(298, 63);
-            this.lbAccounts.Name = "lbAccounts";
-            this.lbAccounts.Size = new System.Drawing.Size(155, 199);
-            this.lbAccounts.TabIndex = 14;
-            this.lbAccounts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbAccounts_MouseClick);
-            // 
             // btnAddAccount
             // 
             this.btnAddAccount.Location = new System.Drawing.Point(23, 198);
@@ -236,18 +192,14 @@ namespace FutBud
             this.btnAddAccount.UseSelectable = true;
             this.btnAddAccount.Click += new System.EventHandler(this.btnAddAccount_Click);
             // 
-            // FormEaLogin
+            // FormAddAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 300);
+            this.ClientSize = new System.Drawing.Size(283, 248);
             this.Controls.Add(this.btnAddAccount);
-            this.Controls.Add(this.lbAccounts);
-            this.Controls.Add(this.lblVersion);
-            this.Controls.Add(this.lblLink);
             this.Controls.Add(this.lblPlatform);
             this.Controls.Add(this.cbPlatform);
-            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.lblSecret);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
@@ -255,11 +207,10 @@ namespace FutBud
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbUsername);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormEaLogin";
+            this.Name = "FormAddAccount";
             this.Resizable = false;
             this.Style = MetroFramework.MetroColorStyle.Default;
-            this.Text = "FUT Login";
-            this.Load += new System.EventHandler(this.FormLogin_Load);
+            this.Text = "Add Account";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,12 +224,8 @@ namespace FutBud
         private MetroLabel lblUsername;
         private MetroLabel lblPassword;
         private MetroLabel lblSecret;
-        private MetroButton btnLogin;
         private MetroComboBox cbPlatform;
         private MetroLabel lblPlatform;
-        private MetroLabel lblVersion;
-        private MetroLink lblLink;
-        private System.Windows.Forms.ListBox lbAccounts;
         private MetroButton btnAddAccount;
     }
 }

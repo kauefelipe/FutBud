@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
@@ -20,25 +21,15 @@ namespace FutBud
             InitializeComponent();
             BringToFront();
             lblVersion.Text = @"Version " + ProductVersion;
-            cbSafe.Checked = Properties.Settings.Default.Safelogin;
-            if (Properties.Settings.Default.Safelogin)
-            {
-                if (Properties.Settings.Default.EAUser != "" && Properties.Settings.Default.EAPW != "" &&Properties.Settings.Default.EAAnswer != "")
-                {
-                    tbUsername.Text = Encryption.Decrypt(Properties.Settings.Default.EAUser);
-                    tbPassword.Text = Encryption.Decrypt(Properties.Settings.Default.EAPW);
-                    tbSecret.Text = Encryption.Decrypt(Properties.Settings.Default.EAAnswer);
-                    cbPlatform.SelectedIndex = Properties.Settings.Default.platform;
-                }
-            }
-            else
-            {
-                cbPlatform.SelectedIndex = 0;
-            }
+            if (!Directory.Exists("cookies"))
+                Directory.CreateDirectory("cookies");
+            DoLoadAccount();
         }
 
         private FutClient _client;
-        
+        List<string[]> _accounts;
+
+
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (tbUsername.Text == "" || tbPassword.Text == "" || tbSecret.Text == "")
@@ -47,9 +38,14 @@ namespace FutBud
                 return;
             }
 
-            if (File.Exists("cookie.dat"))
+            Platform platform = Platform.Pc;
+            var user = tbUsername.Text;
+            var password = tbPassword.Text;
+            var sAnswer = tbSecret.Text;
+
+            if (File.Exists("cookies\\"+user+"_cookie.dat"))
             {
-                CookieContainer cookie = CookieUtil.ReadCookiesFromDisk("cookie.dat");
+                CookieContainer cookie = CookieUtil.ReadCookiesFromDisk("cookies\\" + user + "_cookie.dat");
                 _client = new FutClient(cookie);
             }
             else
@@ -57,26 +53,12 @@ namespace FutBud
                 _client = new FutClient();
             }
             
-            Platform platform = Platform.Pc;
-            var user = tbUsername.Text;
-            var password = tbPassword.Text;
-            var sAnswer = tbSecret.Text;
-            tbPassword.Hide();
-            tbSecret.Hide();
-            tbUsername.Hide();
-            lblPassword.Hide();
-            lblSecret.Hide();
-            lblUsername.Hide();
-            lblPlatform.Hide();
-            cbPlatform.Hide();
-            btnLogin.Hide();
-            cbSafe.Hide();
-            ProgressSpinner.Show();
+            this.Enabled = false;
 
             switch (cbPlatform.SelectedIndex)
             {
                 case 0:
-                    platform = Platform.Pc ;
+                    platform = Platform.Pc;
                     break;
                 case 1:
                     platform = Platform.Ps3;
@@ -92,58 +74,40 @@ namespace FutBud
                     break;
             }
 
-            var loginDetails = new LoginDetails(user, password, sAnswer, platform );
+            var loginDetails = new LoginDetails(user, password, sAnswer, platform);
             ITwoFactorCodeProvider provider = new ImapTwoFactorCodeProvider();
             try
             {
-                if (cbSafe.Checked)
-                {
-                    Properties.Settings.Default.EAUser = Encryption.Encrypt(tbUsername.Text);
-                    Properties.Settings.Default.EAPW = Encryption.Encrypt(tbPassword.Text);
-                    Properties.Settings.Default.EAAnswer = Encryption.Encrypt(tbSecret.Text);
-                    Properties.Settings.Default.platform = cbPlatform.SelectedIndex;
-                    Properties.Settings.Default.Safelogin = cbSafe.Checked;
-                    Properties.Settings.Default.Save();
-                }
 
                 await _client.LoginAsync(loginDetails, provider);
-                var frm = new FormMain(_client);
-                if (!File.Exists("cookie.dat")&& cbSafe.Checked)
+                if (!File.Exists("cookies\\" + user + "_cookie.dat"))
                 {
                     var cookiecontainer = _client.RequestFactories.CookieContainer;
-                    CookieUtil.WriteCookiesToDisk("cookie.dat", cookiecontainer);
+                    CookieUtil.WriteCookiesToDisk("cookies\\" + user + "_cookie.dat", cookiecontainer);
                 }
+                var frm = new FormMain(_client, new[] {user,password, sAnswer, cbPlatform.SelectedIndex.ToString()});
                 frm.Show();
                 Hide();
-                
             }
-            catch (FutException)
+            catch (FutException ex)
             {
                 MessageBox.Show("Login Failed");
+                WriteLog.DoWrite("Login Failed: " + ex.InnerException.Message);
                 _client = null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 MessageBox.Show("Error");
+                WriteLog.DoWrite("Login Error: " + ex.InnerException.Message);
                 _client = null;
-                
+
             }
             finally
             {
-                tbPassword.Show();
-                tbSecret.Show();
-                tbUsername.Show();
-                lblPassword.Show();
-                lblSecret.Show();
-                lblUsername.Show();
-                lblPlatform.Show();
-                cbPlatform.Show();
-                btnLogin.Show();
-                cbSafe.Show();
-                ProgressSpinner.Hide();
+                this.Enabled = true;
             }
-            
+
         }
 
         public class ImapTwoFactorCodeProvider : ITwoFactorCodeProvider
@@ -174,28 +138,12 @@ namespace FutBud
                     MessageBox.Show("Could not check version :(");
                     return;
                 }
-            
+
                 if (!str.Equals("ok"))
                 {
-                    MessageBox.Show("A new version is available ("+str+"). Please visit 'www.futbud.com' to download the newest version");
+                    MessageBox.Show("A new version is available (" + str +
+                                    "). Please visit 'www.futbud.com' to download the newest version");
                 }
-            }
-        }
-        private void cbSafe_CheckedChanged(object sender, EventArgs e)
-        {
-            //clear saved stuff
-            if (cbSafe.Checked == false)
-            {
-                tbPassword.Text = "";
-                tbUsername.Text = "";
-                tbSecret.Text = "";
-                Properties.Settings.Default.EAUser = "";
-                Properties.Settings.Default.EAPW = "";
-                Properties.Settings.Default.EAAnswer = "";
-                Properties.Settings.Default.Safelogin = cbSafe.Checked;
-                Properties.Settings.Default.Save();
-                if(File.Exists("cookie.dat"))
-                    File.Delete("cookie.dat");
             }
         }
 
@@ -212,6 +160,55 @@ namespace FutBud
         {
             Process.Start("http://futbud.com");
         }
+
+        private void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            FormAddAccount x = new FormAddAccount();
+            x.ShowDialog();
+            x.Dispose();
+            DoLoadAccount();
+        }
+
+        
+        private void DoLoadAccount()
+        {
+            _accounts = null;
+            _accounts = new List<string[]>();
+            lbAccounts.Items.Clear();
+
+            int i = 0;
+            try
+            {
+                StreamReader sr = new StreamReader("accounts.txt");
+                while (!sr.EndOfStream)
+                {
+                    var readLine = sr.ReadLine();
+                    if (readLine != null)
+                    {
+                        _accounts.Add(readLine.Split(';')); 
+                        lbAccounts.Items.Add(_accounts[i][0]);
+                        i++;
+                    }
+                    
+                }
+                sr.Close();
+            }
+            catch(Exception ex)
+            {
+                WriteLog.DoWrite("Login Error: " + ex.Message);
+            }
+        }
+
+        private void lbAccounts_MouseClick(object sender, MouseEventArgs e)
+        {
+            var i = lbAccounts.SelectedIndex;
+            if(i==-1)
+                return;
+            tbUsername.Text = _accounts[i][0].ToString();
+            tbPassword.Text = Encryption.Decrypt(_accounts[i][1].ToString());
+            tbSecret.Text = Encryption.Decrypt(_accounts[i][2].ToString());
+            cbPlatform.SelectedIndex = Int32.Parse(_accounts[i][3]);
+        }
     }
-    }
+}
 
