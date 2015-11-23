@@ -43,9 +43,7 @@ namespace FutBud.Services
             {
                 using (Stream stream = File.Open(file, FileMode.Open))
                 {
-                    WriteLog.DoWrite("Reading cookies from disk... ");
                     BinaryFormatter formatter = new BinaryFormatter();
-                    WriteLog.DoWrite("Done.");
                     return (CookieContainer) formatter.Deserialize(stream);
                 }
             }
