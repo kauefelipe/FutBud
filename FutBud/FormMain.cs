@@ -20,7 +20,7 @@ namespace FutBud
 {
     public partial class FormMain : MetroForm
     {
-        readonly FutClient _client;
+        private FutClient _client;
 
         //Timerstuff
         private short _runtimeseconds;
@@ -35,6 +35,7 @@ namespace FutBud
         private int _tradepileMs = Properties.Settings.Default.TradepileRPM;
         private int _maxplayersonrequest = Properties.Settings.Default.MaxPlayersFound;
         private bool _checkforupdates = Properties.Settings.Default.CheckUpdateStartup;
+        private readonly string[] _account;
 
         #endregion
 
@@ -42,6 +43,7 @@ namespace FutBud
         {
             InitializeComponent();
             _client = client;
+            this._account = account;
             StyleManager = metroStyleManager;
             metroStyleManager.Style = Properties.Settings.Default.MetroColor;
             metroStyleManager.Theme = Properties.Settings.Default.MetroTheme;
@@ -176,6 +178,12 @@ namespace FutBud
                 tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Session Expired " +
                                      Environment.NewLine;
                 Stopbot();
+                using (var x = new FormRelog(_account))
+                {
+                    x.ShowDialog();
+                    this._client = x.Client;
+                }
+                Startbot();
             }
             catch (FormatException)
             {

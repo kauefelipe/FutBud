@@ -97,6 +97,12 @@
     <Compile Include="FormAddAccount.Designer.cs">
       <DependentUpon>FormAddAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRelog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelog.Designer.cs">
+      <DependentUpon>FormRelog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\CookieUtil.cs" />
     <Compile Include="Services\Encryption.cs" />
     <Compile Include="FormAddPlayer.cs">
@@ -123,7 +129,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\Relog.cs" />
     <Compile Include="Services\VersionCheck.cs" />
     <Compile Include="Services\WriteLog.cs" />
     <Compile Include="WCF Stuff\InterfaceWcfService.cs" />
@@ -141,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEALogin.resx">
       <DependentUpon>FormEALogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelog.resx">
+      <DependentUpon>FormRelog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTwoFactor.resx">
       <DependentUpon>FormTwoFactor.cs</DependentUpon>
