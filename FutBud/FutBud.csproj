@@ -97,6 +97,12 @@
     <Compile Include="FormAddAccount.Designer.cs">
       <DependentUpon>FormAddAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSupport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSupport.Designer.cs">
+      <DependentUpon>FormSupport.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormRelog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEALogin.resx">
       <DependentUpon>FormEALogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSupport.resx">
+      <DependentUpon>FormSupport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRelog.resx">
       <DependentUpon>FormRelog.cs</DependentUpon>

@@ -25,90 +25,6 @@ namespace FutBud.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FutBuddyUser {
-            get {
-                return ((string)(this["FutBuddyUser"]));
-            }
-            set {
-                this["FutBuddyUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FutBuddyPW {
-            get {
-                return ((string)(this["FutBuddyPW"]));
-            }
-            set {
-                this["FutBuddyPW"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string EAUser {
-            get {
-                return ((string)(this["EAUser"]));
-            }
-            set {
-                this["EAUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string EAPW {
-            get {
-                return ((string)(this["EAPW"]));
-            }
-            set {
-                this["EAPW"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string EAAnswer {
-            get {
-                return ((string)(this["EAAnswer"]));
-            }
-            set {
-                this["EAAnswer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Safelogin {
-            get {
-                return ((bool)(this["Safelogin"]));
-            }
-            set {
-                this["Safelogin"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int platform {
-            get {
-                return ((int)(this["platform"]));
-            }
-            set {
-                this["platform"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3000")]
         public int SearchRPM {
             get {
@@ -176,6 +92,30 @@ namespace FutBud.Properties {
             }
             set {
                 this["CheckUpdateStartup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PlaySound {
+            get {
+                return ((bool)(this["PlaySound"]));
+            }
+            set {
+                this["PlaySound"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ResetCounter {
+            get {
+                return ((bool)(this["ResetCounter"]));
+            }
+            set {
+                this["ResetCounter"] = value;
             }
         }
     }
