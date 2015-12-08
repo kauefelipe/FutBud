@@ -34,7 +34,7 @@ namespace FutBud
 
         private int _startcredits = 0;
         private int _profit = 0;
-        private bool _debug;
+        private bool _debug = Properties.Settings.Default.Debug;
         private int _searchMs = Properties.Settings.Default.SearchRPM;
         private int _tradepileMs = Properties.Settings.Default.TradepileRPM;
         private int _maxplayersonrequest = Properties.Settings.Default.MaxPlayersFound;
@@ -64,6 +64,7 @@ namespace FutBud
             cbCheckforUpdates.Checked = _checkforupdates;
             cbPlaySound.Checked = _playSound;
             cbResetCounter.Checked = _resetCounter;
+            cbDebug.Checked = _debug;
             lblAccount.Text = account[0];
             lblVersion.Text = @"Version " + ProductVersion;
             if(_client!=null)
@@ -116,10 +117,12 @@ namespace FutBud
         private int _i;
         private async void SearchMarket()
         {
-            try
-            {
-                if (_i < mgTable.Rows.Count - 1) //check if i needs a reset
-                {
+            if (_i >= mgTable.Rows.Count - 1) //check if i needs a reset
+                _i = 0;
+
+                try
+                   {
+                
                     var searchParameters = new PlayerSearchParameters
                     {
                         Page = 1,
@@ -164,12 +167,8 @@ namespace FutBud
                             GetCredits();
                         }
                     }
-                }
-                else
-                {
-                    _i = 0;
-                }
-            }
+                  }
+            
             catch (NotEnoughCreditException)
             {
                 WriteLog.DoWrite("Not enough credits");
@@ -215,9 +214,9 @@ namespace FutBud
                                      Environment.NewLine;
                 Stopbot();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                WriteLog.DoWrite("Error on search");
+                WriteLog.DoWrite("Error on search: " + ex);
                 tbLog.SelectionColor = Color.Red;
                 tbLog.SelectedText = DateTime.Now.ToLongTimeString() +
                                      " Error on search- Please be sure that your transfermarket is not locked" +
@@ -269,14 +268,14 @@ namespace FutBud
                                 (response.TradeState.Contains("closed"))) //Player sold
                             {
                                 await _client.RemoveFromTradePileAsync(response);
-                                WriteLog.DoWrite(mgTable[1, i].Value +" sold for " +response.BuyNowPrice);
+                                WriteLog.DoWrite(mgTable[1, i].Value + " sold for " + response.BuyNowPrice);
                                 tbLog.SelectionColor = Color.Black;
                                 tbLog.SelectedText =
                                     (DateTime.Now.ToLongTimeString() + " " + mgTable[1, i].Value +
                                      " sold for " +
                                      response.BuyNowPrice) +
                                     Environment.NewLine;
-                                if(_playSound)
+                                if (_playSound)
                                     SystemSounds.Exclamation.Play();
                             }
 
@@ -295,13 +294,17 @@ namespace FutBud
                         }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 tbLog.SelectionColor = Color.Red;
-                WriteLog.DoWrite("Tradepile Error");
+                WriteLog.DoWrite("Tradepile Error: " +ex);
                 tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Tradepile Error" + Environment.NewLine;
             }
-            GetCredits();
+            finally
+            {
+                GetCredits();
+            }
+            
         }
 
         private async void GetCredits()
@@ -324,9 +327,11 @@ namespace FutBud
                     lblProfitval.Text = _profit.ToString();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                // ignored
+                tbLog.SelectionColor = Color.Red;
+                WriteLog.DoWrite("Error getting Credits: " + ex);
+                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Error getting Credits" + Environment.NewLine;
             }
         }
 
@@ -406,15 +411,6 @@ namespace FutBud
             lblRuntime.Text = @"Runtime: " +_runtimedays.ToString("00") + @":" + _runtimehours.ToString("00") + @":" + _runtimeminutes.ToString("00") + @":" +
                               _runtimeseconds.ToString("00");
         }
-
-        //Toggle Debug Button
-        private void toggleDebug_CheckedChanged(object sender, EventArgs e)
-        {
-            _debug = !_debug;
-            tbLog.SelectionColor = Color.Black;
-            tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Debug = " + _debug + Environment.NewLine;
-        }
-
         //Search request timer
         private void tmrRequest_Tick(object sender, EventArgs e)
         {
@@ -537,7 +533,6 @@ namespace FutBud
             }
                 
             Checktradepile();
-            GetCredits();
         }
 
         
@@ -655,6 +650,7 @@ namespace FutBud
             Properties.Settings.Default.CheckUpdateStartup = _checkforupdates;
             Properties.Settings.Default.ResetCounter = _resetCounter;
             Properties.Settings.Default.PlaySound = _playSound;
+            Properties.Settings.Default.Debug = _debug;
             Properties.Settings.Default.Save();
         }
 
@@ -708,5 +704,11 @@ namespace FutBud
         {
             _playSound = cbPlaySound.Checked;
         }
+
+        private void cbDebug_CheckedChanged(object sender, EventArgs e)
+        {
+            _debug = cbDebug.Checked;
+        }
+        
     }
 }

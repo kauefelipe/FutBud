@@ -60,6 +60,7 @@ namespace FutBud
             this.btnClear = new MetroFramework.Controls.MetroButton();
             this.tbLog = new System.Windows.Forms.RichTextBox();
             this.tpSettings = new MetroFramework.Controls.MetroTabPage();
+            this.cbDebug = new MetroFramework.Controls.MetroCheckBox();
             this.cbPlaySound = new MetroFramework.Controls.MetroCheckBox();
             this.cbResetCounter = new MetroFramework.Controls.MetroCheckBox();
             this.cbCheckforUpdates = new MetroFramework.Controls.MetroCheckBox();
@@ -72,8 +73,6 @@ namespace FutBud
             this.trackbarSearch = new MetroFramework.Controls.MetroTrackBar();
             this.tbSearch = new MetroFramework.Controls.MetroTextBox();
             this.lblSearch = new MetroFramework.Controls.MetroLabel();
-            this.lblDebug = new MetroFramework.Controls.MetroLabel();
-            this.toggleDebug = new MetroFramework.Controls.MetroToggle();
             this.tpAppearance = new MetroFramework.Controls.MetroTabPage();
             this.mtDark = new MetroFramework.Controls.MetroTile();
             this.mtLight = new MetroFramework.Controls.MetroTile();
@@ -142,7 +141,7 @@ namespace FutBud
             this.tcMain.Controls.Add(this.tpAbout);
             this.tcMain.Location = new System.Drawing.Point(24, 104);
             this.tcMain.Name = "tcMain";
-            this.tcMain.SelectedIndex = 0;
+            this.tcMain.SelectedIndex = 2;
             this.tcMain.Size = new System.Drawing.Size(662, 337);
             this.tcMain.TabIndex = 1;
             this.tcMain.UseSelectable = true;
@@ -361,6 +360,7 @@ namespace FutBud
             // 
             // tpSettings
             // 
+            this.tpSettings.Controls.Add(this.cbDebug);
             this.tpSettings.Controls.Add(this.cbPlaySound);
             this.tpSettings.Controls.Add(this.cbResetCounter);
             this.tpSettings.Controls.Add(this.cbCheckforUpdates);
@@ -373,8 +373,6 @@ namespace FutBud
             this.tpSettings.Controls.Add(this.trackbarSearch);
             this.tpSettings.Controls.Add(this.tbSearch);
             this.tpSettings.Controls.Add(this.lblSearch);
-            this.tpSettings.Controls.Add(this.lblDebug);
-            this.tpSettings.Controls.Add(this.toggleDebug);
             this.tpSettings.HorizontalScrollbarBarColor = true;
             this.tpSettings.HorizontalScrollbarHighlightOnWheel = false;
             this.tpSettings.HorizontalScrollbarSize = 10;
@@ -386,6 +384,17 @@ namespace FutBud
             this.tpSettings.VerticalScrollbarBarColor = true;
             this.tpSettings.VerticalScrollbarHighlightOnWheel = false;
             this.tpSettings.VerticalScrollbarSize = 10;
+            // 
+            // cbDebug
+            // 
+            this.cbDebug.AutoSize = true;
+            this.cbDebug.Location = new System.Drawing.Point(3, 200);
+            this.cbDebug.Name = "cbDebug";
+            this.cbDebug.Size = new System.Drawing.Size(58, 15);
+            this.cbDebug.TabIndex = 17;
+            this.cbDebug.Text = "Debug";
+            this.cbDebug.UseSelectable = true;
+            this.cbDebug.CheckedChanged += new System.EventHandler(this.cbDebug_CheckedChanged);
             // 
             // cbPlaySound
             // 
@@ -558,26 +567,6 @@ namespace FutBud
             this.lblSearch.Size = new System.Drawing.Size(144, 19);
             this.lblSearch.TabIndex = 4;
             this.lblSearch.Text = "Search every x seconds";
-            // 
-            // lblDebug
-            // 
-            this.lblDebug.AutoSize = true;
-            this.lblDebug.Location = new System.Drawing.Point(603, 258);
-            this.lblDebug.Name = "lblDebug";
-            this.lblDebug.Size = new System.Drawing.Size(48, 19);
-            this.lblDebug.TabIndex = 3;
-            this.lblDebug.Text = "Debug";
-            // 
-            // toggleDebug
-            // 
-            this.toggleDebug.AutoSize = true;
-            this.toggleDebug.Location = new System.Drawing.Point(517, 258);
-            this.toggleDebug.Name = "toggleDebug";
-            this.toggleDebug.Size = new System.Drawing.Size(80, 17);
-            this.toggleDebug.TabIndex = 2;
-            this.toggleDebug.Text = "Aus";
-            this.toggleDebug.UseSelectable = true;
-            this.toggleDebug.CheckedChanged += new System.EventHandler(this.toggleDebug_CheckedChanged);
             // 
             // tpAppearance
             // 
@@ -1029,8 +1018,6 @@ namespace FutBud
         private MetroButton btnAdd;
         private MetroToggle btnStart;
         private RichTextBox tbLog;
-        private MetroLabel lblDebug;
-        private MetroToggle toggleDebug;
         private Timer tmrSearchRequest;
         private MetroButton btnLoad;
         private MetroButton btnSave;
@@ -1071,5 +1058,6 @@ namespace FutBud
         private MetroCheckBox cbResetCounter;
         private MetroLabel lblProfit;
         private MetroLabel lblProfitval;
+        private MetroCheckBox cbDebug;
     }
 }
