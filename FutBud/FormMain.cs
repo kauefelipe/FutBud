@@ -164,7 +164,6 @@ namespace FutBud
                             GetCredits();
                         }
                     }
-                    _i++;
                 }
                 else
                 {
@@ -203,14 +202,16 @@ namespace FutBud
             catch (FormatException)
             {
                 tbLog.SelectionColor = Color.Red;
-                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Entry " + _i + " has an invalid Format or is null" +
+                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Entry " + _i +
+                                     " has an invalid Format or is null" +
                                      Environment.NewLine;
                 Stopbot();
             }
             catch (NullReferenceException)
             {
                 tbLog.SelectionColor = Color.Red;
-                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Entry " + _i + " has an invalid Format or is null" +
+                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Entry " + _i +
+                                     " has an invalid Format or is null" +
                                      Environment.NewLine;
                 Stopbot();
             }
@@ -218,8 +219,13 @@ namespace FutBud
             {
                 WriteLog.DoWrite("Error on search");
                 tbLog.SelectionColor = Color.Red;
-                tbLog.SelectedText = DateTime.Now.ToLongTimeString() + " Error on search- Please be sure that your transfermarket is not locked" +
+                tbLog.SelectedText = DateTime.Now.ToLongTimeString() +
+                                     " Error on search- Please be sure that your transfermarket is not locked" +
                                      Environment.NewLine;
+            }
+            finally
+            {
+                _i++;
             }
         }
 
